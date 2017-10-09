@@ -2,6 +2,8 @@
 
 Sublime Text has a great regex-powered find-and-replace feature. But, what if you want to do a little more complex replacement? "Replace with Python" empowers your replace command with Python, letting you do advanced text manipulation intuitively and easily.
 
+![Replacing binary with characters in Sublime Text](samples/RWP_Binary.gif)
+
 ## Variables
 
 - `text` - Selected text. Usable in `Replace With Python` and `Permute Selections => Sort With Python`.

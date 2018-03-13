@@ -1,0 +1,14 @@
+[
+    {
+        "caption": "With Python: Sort Lines",
+        "command": "with_python_prompt_sort_lines"
+    },
+    {
+        "caption": "With Python: Sort Selections",
+        "command": "with_python_prompt_sort_selections"
+    },
+    {
+        "caption": "With Python: Replace",
+        "command": "with_python_prompt_replace"
+    }
+]

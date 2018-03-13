@@ -1,7 +1,7 @@
 import sublime, sublime_plugin
 
 
-class PromptReplaceWithPythonCommand(sublime_plugin.WindowCommand):
+class WithPythonPromptReplaceCommand(sublime_plugin.WindowCommand):
     def run(self):
         self.settings = sublime.load_settings("with_python")
         prompt_text = self.settings.get("replace_lastcode") or ""
@@ -11,11 +11,11 @@ class PromptReplaceWithPythonCommand(sublime_plugin.WindowCommand):
         self.settings.set("replace_lastcode", text)
         try:
             if self.window.active_view():
-                self.window.active_view().run_command("replace_with_python", {"code": text} )
+                self.window.active_view().run_command("with_python_replace", {"code": text} )
         except ValueError:
             pass
 
-class ReplaceWithPythonCommand(sublime_plugin.TextCommand):
+class WithPythonReplaceCommand(sublime_plugin.TextCommand):
     def run(self, edit, code):
         # Make some common modules available
         import re
@@ -41,7 +41,7 @@ class ReplaceWithPythonCommand(sublime_plugin.TextCommand):
             self.view.replace(edit, r, newtext)
 
 
-class PromptSortLinesWithPythonCommand(sublime_plugin.WindowCommand):
+class WithPythonPromptSortLinesCommand(sublime_plugin.WindowCommand):
     def run(self):
         self.settings = sublime.load_settings("with_python")
         prompt_text = self.settings.get("sort_lines_lastcode") or ""
@@ -51,11 +51,11 @@ class PromptSortLinesWithPythonCommand(sublime_plugin.WindowCommand):
         self.settings.set("sort_lines_lastcode", text)
         try:
             if self.window.active_view():
-                self.window.active_view().run_command("sort_lines_with_python", {"code": text} )
+                self.window.active_view().run_command("with_python_sort_lines", {"code": text} )
         except ValueError:
             pass
 
-class SortLinesWithPythonCommand(sublime_plugin.TextCommand):
+class WithPythonSortLinesCommand(sublime_plugin.TextCommand):
     def run(self, edit, code):
         # Make some common modules available
         import re
@@ -96,7 +96,7 @@ class SortLinesWithPythonCommand(sublime_plugin.TextCommand):
             self.view.replace(edit, r, out)
 
 
-class PromptSortSelectionsWithPythonCommand(sublime_plugin.WindowCommand):
+class WithPythonPromptSortSelectionsCommand(sublime_plugin.WindowCommand):
     def run(self):
         self.settings = sublime.load_settings("with_python")
         prompt_text = self.settings.get("sort_selections_lastcode") or ""
@@ -106,7 +106,7 @@ class PromptSortSelectionsWithPythonCommand(sublime_plugin.WindowCommand):
         self.settings.set("sort_selections_lastcode", text)
         try:
             if self.window.active_view():
-                self.window.active_view().run_command("sort_selections_with_python", {"code": text} )
+                self.window.active_view().run_command("with_python_sort_selections", {"code": text} )
         except ValueError:
             pass
 
@@ -114,7 +114,7 @@ class PromptSortSelectionsWithPythonCommand(sublime_plugin.WindowCommand):
         view = self.window.active_view()
         return view and len(view.sel()) > 1
 
-class SortSelectionsWithPythonCommand(sublime_plugin.TextCommand):
+class WithPythonSortSelectionsCommand(sublime_plugin.TextCommand):
     def run(self, edit, code):
         # Make some common modules available
         import re

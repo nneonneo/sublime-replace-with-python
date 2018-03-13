@@ -1,0 +1,22 @@
+[
+    {
+        "caption": "Edit",
+        "mnemonic": "E",
+        "id": "edit",
+        "children":
+        [
+            { "caption": "-", "id": "permute" },
+            { "caption": "Sort Lines with Python", "command": "with_python_prompt_sort_lines" },
+            { "caption": "Sort Selections with Python", "command": "with_python_prompt_sort_selections" }
+        ]
+    },
+    {
+        "caption": "Find",
+        "mnemonic": "i",
+        "id": "find",
+        "children":
+        [
+            { "caption": "Replace with Python", "command": "with_python_prompt_replace"}
+        ]
+    }
+]

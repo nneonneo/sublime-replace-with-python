@@ -1,5 +1,8 @@
 import sublime, sublime_plugin
+import sys
 
+
+is_ST3 = (sys.version_info >= (3, 0))
 
 class WithPythonPromptReplaceCommand(sublime_plugin.WindowCommand):
     def run(self):
@@ -32,7 +35,10 @@ class WithPythonReplaceCommand(sublime_plugin.TextCommand):
             text = self.view.substr(r)
             try:
                 codelocals = {"text": text, "index": i}
-                exec code in codeglobals, codelocals
+                if is_ST3:
+                    exec(code, codeglobals, codelocals)
+                else:
+                    exec("exec code in codeglobals, codelocals")
                 newtext = codelocals['text']
             except Exception as e:
                 sublime.error_message("Error while running your code: " + str(e))
@@ -84,7 +90,7 @@ class WithPythonSortLinesCommand(sublime_plugin.TextCommand):
                 final_newline = False
 
             try:
-                lines.sort(key=lambda (i, line): eval(code, codeglobals, {"line": line.rstrip('\n'), "index": seli, "lineno": i}))
+                lines.sort(key=lambda arg: eval(code, codeglobals, {"line": arg[1].rstrip('\n'), "index": seli, "lineno": arg[0]}))
             except Exception as e:
                 sublime.error_message("Error while running your code: " + str(e))
                 break
@@ -128,6 +134,6 @@ class WithPythonSortSelectionsCommand(sublime_plugin.TextCommand):
 
         sel = self.view.sel()
         texts = [[i, self.view.substr(r)] for i, r in enumerate(sel)]
-        texts.sort(key=lambda (i, text): eval(code, codeglobals, {"text": text, "index": i}))
-        for r, (i, t) in reversed(zip(sel, texts)):
+        texts.sort(key=lambda arg: eval(code, codeglobals, {"text": arg[1], "index": arg[0]}))
+        for r, (i, t) in zip(reversed(sel), reversed(texts)):
             self.view.replace(edit, r, t)
